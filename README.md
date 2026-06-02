@@ -1,6 +1,5 @@
 # Workshop: Búsqueda Semántica Multimodal con CLIP
 
-**Curso:** SI7011 - Deep Learning  
 **Universidad EAFIT**
 
 ---
