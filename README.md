@@ -1,328 +1,161 @@
-# VLM Bootcamp: Semantic Image Search with CLIP
+# Workshop: Búsqueda Semántica Multimodal con CLIP
 
-## Goal
-
-Build a semantic image search engine using CLIP.
-
-Students will learn how Vision-Language Models represent images and text in a shared embedding space, and how this enables zero-shot retrieval.
+**Curso:** SI7011 - Deep Learning  
+**Universidad EAFIT**
 
 ---
 
-## Learning Outcomes
+## ¿Qué vamos a construir?
 
-By the end of the bootcamp, students will be able to:
+Un motor de búsqueda semántica que permite encontrar imágenes usando lenguaje natural — sin etiquetas, sin entrenamiento adicional. Al final del workshop, tendrás un sistema capaz de recibir una descripción como `"a cyclist jumping in the air"` y recuperar las imágenes más relevantes de un corpus de 2000 imágenes.
 
-- Explain the basic idea behind CLIP and multimodal embeddings.
-- Encode images and text into a shared vector space.
-- Compute similarity between text queries and images.
-- Build a simple image retrieval system.
-- Improve retrieval results using prompt engineering.
-- Evaluate retrieval performance using retrieval metrics.
+Esto es lo que hacen sistemas reales como Google Lens, Pinterest Visual Search o la búsqueda por imagen en e-commerce. La diferencia es que lo construirás desde cero, función por función.
 
 ---
 
-## Bootcamp Schedule
+## Flujo del workshop
 
-| Time | Activity |
-|---|---|
-| 08:00 - 08:30 | Introduction to VLMs and CLIP |
-| 08:30 - 09:30 | Build the baseline retrieval system |
-| 09:30 - 10:00 | Retrieval metrics and evaluation |
-| 10:00 - 11:30 | Mini-competition |
-| 11:30 - 12:00 | Presentations and discussion |
-
----
-
-## Repository Structure
-
-```text
-vlm-clip-bootcamp/
-│
-├── README.md
-├── requirements.txt
-│
-├── notebooks/
-│   ├── 01_clip_baseline.ipynb
-│   ├── 02_image_retrieval.ipynb
-│   └── 03_competition_submission.ipynb
-│
-├── data/
-│   ├── images/
-│   ├── queries.csv
-│   ├── ground_truth.csv
-│   └── sample_submission.csv
-│
-├── src/
-│   ├── clip_utils.py
-│   ├── retrieval.py
-│   ├── evaluation.py
-│   └── visualization.py
-│
-├── submissions/
-│   └── sample_submission.csv
-│
-└── assets/
-    └── figures/
+```
+[Charlas introductorias]
+    ↓
+Presentación 1 — ¿Qué es visión por computador y por qué importa hoy?
+    ↓
+Presentación 2 — CLIP: arquitectura, aprendizaje contrastivo, espacio compartido
+    ↓
+Presentación 3 — Búsqueda semántica: embeddings, similitud coseno, retrieval
+    ↓
+[Workshop práctico — 3 notebooks en orden]
+    ↓
+01_clip_baseline.ipynb     → construir las funciones base
+    ↓
+02_image_retrieval.ipynb   → construir el motor de búsqueda
+    ↓
+03_competition_submission.ipynb  → competición en HuggingFace
+    ↓
+[Presentaciones de equipos y discusión]
 ```
 
 ---
 
-## Dataset
+## Lo que aprenderás
 
-The dataset contains:
-
-- A collection of images.
-- A set of text queries.
-- A ground-truth file indicating relevant images for each query.
-- A sample submission file.
-
-Recommended datasets:
-
-- Oxford Pets
-- Food101
-- Caltech101
-- Fashion products
-- Colombian biodiversity
-- Tourism images
-
-Recommended dataset size:
-
-- Between 200 and 1000 images.
+- Cómo CLIP proyecta imágenes y texto a un espacio vectorial compartido de 512 dimensiones
+- Por qué la similitud coseno entre vectores normalizados es equivalente a un producto punto
+- Cómo construir un índice vectorial de imágenes y hacer retrieval en milisegundos
+- Cómo funciona la búsqueda imagen → imagen y por qué el pipeline es idéntico al de texto → imagen
+- Qué tipos de queries fallan sistemáticamente en CLIP y por qué (negaciones, conteo, relaciones espaciales)
+- Cómo combinar señales de texto e imagen en un sistema de búsqueda híbrida
+- Qué es Reciprocal Rank Fusion y cuándo supera a la fusión lineal de scores
 
 ---
 
-## Input Files
+## Estructura de los notebooks
 
-### queries.csv
+### `01_clip_baseline.ipynb` — Fundamentos
 
-```csv
-query_id,query_text
-q001,a photo of a small white dog
-q002,a plate of pasta with tomato sauce
-q003,a red flower with long petals
+El punto de partida. Se trabaja con 50 imágenes de Flickr30k para explorar los conceptos sin tiempos de espera.
+
+| TODO | Función | Qué hace |
+|------|---------|----------|
+| 1 | `get_text_embeddings` | Tokeniza textos y extrae embeddings normalizados L2 |
+| 2 | `get_image_embeddings` | Preprocesa imágenes PIL y extrae embeddings normalizados L2 |
+| 3 | `compute_similarity_matrix` | Calcula la matriz N×N de similitud coseno entre imágenes y textos |
+| 4 | `compute_scores` | Calcula el vector de scores de un query contra todo el corpus |
+
+Al terminar este notebook se puede visualizar la matriz de similitud y ver que los pares correctos tienen scores más altos que los aleatorios — eso es la evidencia de que el espacio compartido de CLIP funciona.
+
+---
+
+### `02_image_retrieval.ipynb` — Motor de búsqueda
+
+Escala a 800 imágenes y construye el motor de búsqueda completo. Las 4 funciones del notebook 01 se copian en la celda de setup.
+
+| TODO | Función | Qué hace |
+|------|---------|----------|
+| 5 | `build_image_index` | Indexa el corpus en batches de 32, retorna matriz `(800, 512)` |
+| 6 | `search_by_text` | Pipeline completo texto → top-k imágenes |
+| 7 | `search_by_image` | Pipeline imagen → top-k imágenes similares (mismo código, distinto encoder) |
+
+Incluye dos widgets interactivos: uno para escribir queries de texto y ver los resultados en tiempo real, y uno con slider para elegir una imagen del corpus como query.
+
+Al final, una sección de **casos de fallo** donde se prueba CLIP con negaciones, conteo exacto y relaciones espaciales — y una tabla de reflexión para completar.
+
+---
+
+### `03_competition_submission.ipynb` — Reto final
+
+El reto de la competición. Corpus de 2000 imágenes. Se dan **3 imágenes de referencia fijas** para todos los equipos:
+
+- `ref_0` — partido de fútbol
+- `ref_1` — ciclista BMX en el aire  
+- `ref_2` — gente bailando en club nocturno
+
+| TODO | Qué implementar |
+|------|----------------|
+| **A** | Definir un query de texto para cada imagen de referencia. No se pueden usar captions del dataset — hay que inventarlos. |
+| **B** | `search_by_reference`: fusión lineal de scores de texto e imagen `score = α · sim_texto + (1-α) · sim_imagen` |
+| **C (extra)** | Mejora libre: query ensemble, Reciprocal Rank Fusion, o alpha distinto por referencia |
+
+**Métrica — Overlap@10:** los top-10 de cada equipo se comparan contra los top-10 que recuperaría un oracle que conoce los captions reales de Flickr30k. Cuanto mejor describes la imagen con tu query, mayor el overlap.
+
+$$\text{score} = \frac{1}{3} \sum_{i=1}^{3} \frac{|\text{top-10}_{\text{tuyo}}(i) \cap \text{top-10}_{\text{oracle}}(i)|}{10}$$
+
+Los equipos con el mismo método pero distinto query obtendrán resultados distintos — eso es lo que diferencia el leaderboard.
+
+---
+
+## Recursos de referencia
+
+Dos hojas de referencia rápida disponibles en el repositorio para consultar mientras se trabaja en los TODOs:
+
+- `ref_01_pytorch_hf_models.md` — cómo usar modelos de HuggingFace: `from_pretrained`, `eval()`, `no_grad()`, mover tensores al device, extraer features
+- `ref_02_tensor_operations.md` — operaciones de tensor necesarias: shapes, producto matricial, normalización L2, `topk`, `argsort`, `cat`, fusión lineal
+
+---
+
+## Setup técnico
+
+Todo corre en **Google Colab con CPU**. No se necesita GPU ni cuenta de pago.
+
+```
+# Notebooks 01 y 02
+transformers, datasets (AnyModal/flickr30k), Pillow, ipywidgets, pandas, scikit-learn
+
+# Notebook 03
+transformers, datasets (Mozilla/flickr30k-transformed-captions), Pillow, pandas
 ```
 
-### ground_truth.csv
-
-```csv
-query_id,image_id
-q001,img_023.jpg
-q001,img_145.jpg
-q002,img_087.jpg
-```
-
-### sample_submission.csv
-
-```csv
-query_id,image_id_1,image_id_2,image_id_3,image_id_4,image_id_5
-q001,img_001.jpg,img_002.jpg,img_003.jpg,img_004.jpg,img_005.jpg
-q002,img_006.jpg,img_007.jpg,img_008.jpg,img_009.jpg,img_010.jpg
-```
+Tiempos estimados de ejecución:
+- Notebook 01: ~3 min (50 imágenes, sin indexación)
+- Notebook 02: ~7 min total (~2 min de indexación + exploración)
+- Notebook 03: ~10 min total (~5 min de indexación de 2000 imágenes + reto)
 
 ---
 
-## Competition Task
+## Competición
 
-Given a text query, retrieve the top-k most relevant images.
+La competición está en HuggingFace Competitions. El link se comparte al inicio del workshop.
 
-Example:
+- Límite: **3 submissions por día**
+- Métrica: **Overlap@10** promedio sobre las 3 imágenes de referencia
+- El notebook 03 incluye una función `evaluate_local` para medir el score localmente antes de subir
+- El CSV de submission incluye el `query_text` usado — esto permite comparar estrategias en la discusión final
 
-```text
-Query:
-"a dog running on grass"
+**Puntos de referencia esperados** para `clip-vit-base-patch32` con 2000 imágenes:
 
-Output:
-Top 5 most relevant images
-```
-
-Students should submit a ranked list of image predictions for each query.
-
----
-
-## Baseline Method
-
-The baseline system uses CLIP as follows:
-
-1. Load a pretrained CLIP model.
-2. Encode all images.
-3. Encode text queries.
-4. Compute cosine similarity.
-5. Return the top-k images.
+| Sistema | Overlap@10 aprox. |
+|---------|-------------------|
+| Texto puro con query genérico | ~0.10 |
+| Texto puro con query descriptivo | ~0.20 |
+| Híbrido bien tunado | ~0.25 |
+| Híbrido + query ensemble (TODO C) | ~0.30 |
 
 ---
 
-## Mini-Competition Rules
+## Preguntas para la discusión final
 
-Students compete by improving the baseline retrieval system.
-
-Students are NOT allowed to train large models.
-
-### Allowed Improvements
-
-- Better prompts.
-- Multi-prompt averaging.
-- Query expansion.
-- Embedding normalization.
-- Image preprocessing.
-- Model comparison.
-- Reranking strategies.
-
-### Not Allowed
-
-- Manual labeling of test queries.
-- Hardcoding query-image pairs.
-- Using ground-truth labels from the test set.
-
----
-
-## Evaluation
-
-Main metric:
-
-- Recall@5
-
-Optional metrics:
-
-- Recall@1
-- Recall@10
-- Mean Reciprocal Rank (MRR)
-- Mean Average Precision (mAP)
-
-### Recall@5
-
-A prediction is considered correct if at least one relevant image appears in the top 5 retrieved images.
-
----
-
-## Deliverables
-
-Each team must submit:
-
-1. A notebook with the solution.
-2. A CSV file with predictions.
-3. A short explanation of the strategy used.
-
----
-
-## Suggested Explanation Format
-
-```md
-# Team Name
-
-## Strategy
-
-Briefly describe your retrieval approach.
-
-## Improvements over baseline
-
-Explain what you changed.
-
-## Results
-
-Report your Recall@5 score.
-
-## Reflections
-
-Mention one success and one limitation.
-```
-
----
-
-## Suggested Notebooks
-
-### 01_clip_baseline.ipynb
-
-Topics:
-
-- Load CLIP.
-- Encode images.
-- Encode text.
-- Compute similarity.
-
-### 02_image_retrieval.ipynb
-
-Topics:
-
-- Build retrieval functions.
-- Visualize top-k results.
-- Test prompts.
-
-### 03_competition_submission.ipynb
-
-Topics:
-
-- Generate predictions.
-- Save submission CSV.
-- Evaluate locally.
-
----
-
-## Technical Stack
-
-Required libraries:
-
-```txt
-torch
-torchvision
-transformers
-pillow
-numpy
-pandas
-matplotlib
-scikit-learn
-tqdm
-```
-
-Optional libraries:
-
-```txt
-faiss-cpu
-gradio
-umap-learn
-```
-
----
-
-## Suggested Starter Functions
-
-```python
-load_clip_model()
-encode_images()
-encode_texts()
-compute_similarity()
-retrieve_top_k()
-evaluate_recall_at_k()
-plot_retrieval_results()
-```
-
----
-
-## Discussion Questions
-
-- Why can CLIP retrieve images without task-specific training?
-- What types of prompts worked best?
-- What types of prompts failed?
-- How does prompt wording affect embeddings?
-- What are the limitations of semantic retrieval?
-- How could this system evolve into a multimodal RAG system?
-
----
-
-## Possible Extensions
-
-For advanced students:
-
-- Add a Gradio interface.
-- Compare CLIP vs SigLIP.
-- Add FAISS indexing.
-- Build a visual recommendation system.
-- Add metadata filtering.
-- Use a VLM to explain retrieved images.
-
----
-
-## Suggested Repository Name
-
-```text
-vlm-clip-semantic-search-bootcamp
-```
+- ¿Qué estrategia usaron para escribir los queries? ¿Qué aspectos de la imagen priorizaron?
+- ¿El parámetro `alpha` óptimo fue el mismo para las 3 imágenes de referencia?
+- ¿Por qué CLIP falla con negaciones? ¿Qué implicaciones tiene para aplicaciones reales?
+- ¿En qué se diferencia un sistema de retrieval con CLIP de uno con FAISS + embeddings más grandes?
+- ¿Cómo evolucionaría este sistema hacia un RAG multimodal?
