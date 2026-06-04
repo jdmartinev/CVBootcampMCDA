@@ -72,7 +72,7 @@ Las cuatro funciones del notebook 01 se copian en la celda de setup. El notebook
 
 Corpus de **2000 imágenes**. Se dan tres imágenes de referencia fijas — un partido de fútbol, un ciclista BMX y gente bailando en un club nocturno. Para cada una, el estudiante debe inventar un query de texto descriptivo y construir un sistema que combine esa señal de texto con la señal visual de la imagen de referencia.
 
-![Flujo del reto de competición](figs/NB03.png)
+![Flujo del reto de competición](figs/NB3.png)
 
 | TODO | Qué implementar |
 |------|----------------|
