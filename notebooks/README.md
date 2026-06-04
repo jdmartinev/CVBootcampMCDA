@@ -22,7 +22,7 @@ Este directorio contiene los tres notebooks del workshop, diseñados para comple
 
 ## 01 — CLIP Baseline
 
-[01_clip_baseline.ipynb](01_clip_baseline)
+[01_clip_baseline](01_clip_baseline.ipynb)
 
 **Objetivo:** implementar las cuatro funciones base que hacen posible la búsqueda semántica con CLIP.
 
