@@ -22,6 +22,8 @@ Este directorio contiene los tres notebooks del workshop, diseñados para comple
 
 ## 01 — CLIP Baseline
 
+(01_clip_baseline)[01_clip_baseline.ipynb]
+
 **Objetivo:** implementar las cuatro funciones base que hacen posible la búsqueda semántica con CLIP.
 
 Se trabaja con un subset de **50 imágenes** de Flickr30k para explorar los conceptos sin tiempos de espera. El foco es entender qué ocurre matemáticamente: cómo un texto y una imagen llegan a ser vectores comparables en el mismo espacio.
