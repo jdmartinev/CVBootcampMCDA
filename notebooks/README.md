@@ -26,9 +26,7 @@ Este directorio contiene los tres notebooks del workshop, diseñados para comple
 
 Se trabaja con un subset de **50 imágenes** de Flickr30k para explorar los conceptos sin tiempos de espera. El foco es entender qué ocurre matemáticamente: cómo un texto y una imagen llegan a ser vectores comparables en el mismo espacio.
 
-<!-- FIGURA NB-1: El espacio compartido de CLIP -->
-<!-- Descripción en figuras_notebooks.md → FIGURA NB-1 -->
-![Espacio compartido CLIP](../assets/nb01_shared_space.png)
+![Espacio compartido CLIP](figs/NB1.png)
 
 | TODO | Función | Qué implementar |
 |------|---------|----------------|
