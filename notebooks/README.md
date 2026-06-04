@@ -37,9 +37,7 @@ Se trabaja con un subset de **50 imágenes** de Flickr30k para explorar los conc
 | 3 | `compute_similarity_matrix` | Calcular la matriz N×N de similitud coseno entre imágenes y textos como producto matricial |
 | 4 | `compute_scores` | Calcular el vector de scores (N,) de un único query contra todo el corpus |
 
-<!-- FIGURA NB-2: La matriz de similitud -->
-<!-- Descripción en figuras_notebooks.md → FIGURA NB-2 -->
-![Matriz de similitud](../assets/nb01_similarity_matrix.png)
+![Matriz de similitud](figs/NB1_2.png)
 
 **Visualizaciones incluidas:**
 - Matriz de similitud 15×15 como heatmap — la diagonal más brillante confirma que CLIP alinea los pares correctos
