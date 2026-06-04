@@ -1,0 +1,99 @@
+# Referencias
+
+Hojas de referencia rápida para consultar **mientras trabajas en los TODOs**. No son lecturas previas — ábrelas cuando te atasques en algo concreto.
+
+---
+
+## Cuándo usar cada una
+
+| Si tienes dudas sobre... | Consulta |
+|--------------------------|----------|
+| Cómo cargar CLIP con HuggingFace | `ref_01` § 1 |
+| Cómo mover el modelo a GPU/CPU | `ref_01` § 2 |
+| Por qué usar `model.eval()` | `ref_01` § 3 |
+| Por qué usar `torch.no_grad()` | `ref_01` § 4 |
+| Cómo mover los inputs al device | `ref_01` § 5 |
+| Cómo extraer embeddings con CLIP | `ref_01` § 6 |
+| Un error de device o de gradiente | `ref_01` § Errores comunes |
+| Qué shape tiene mi tensor | `ref_02` § 1 |
+| Cómo hacer producto matricial | `ref_02` § 2 |
+| Cómo normalizar L2 | `ref_02` § 3 |
+| Cómo obtener los top-k | `ref_02` § 4 |
+| Cómo ordenar scores con argsort | `ref_02` § 5 |
+| Cómo indexar con otro tensor | `ref_02` § 6 |
+| Cómo concatenar batches | `ref_02` § 7 |
+| Cómo hacer la fusión lineal | `ref_02` § 8 |
+| Cómo verificar que mi código es correcto | `ref_02` § 9 |
+
+---
+
+## `ref_01_pytorch_hf_models.md` — Modelos de HuggingFace con PyTorch
+
+Cubre el ciclo completo de uso de un modelo preentrenado: carga, configuración para inferencia, procesamiento de inputs y extracción de embeddings. Incluye la tabla de errores más comunes y sus soluciones.
+
+**Relevante para:** TODO 1, TODO 2, TODO 5, TODO 6, TODO 7, TODO B.
+
+---
+
+## `ref_02_tensor_operations.md` — Operaciones con tensores
+
+Cubre las operaciones de tensor que aparecen en los TODOs: shapes, multiplicación matricial, normalización L2, topk, argsort, indexación y concatenación. Incluye el flujo completo del pipeline con los shapes en cada paso.
+
+<!-- FIGURA REF-01: Flujo del pipeline con shapes -->
+<!-- Ver descripción abajo -->
+![Flujo del pipeline con shapes](../assets/ref_pipeline_shapes.png)
+
+**Relevante para:** TODO 3, TODO 4, TODO 5, TODO 6, TODO 7, TODO A, TODO B, TODO C.
+
+---
+
+## Figura necesaria
+
+Solo se necesita **una figura** para este directorio, correspondiente al diagrama ASCII del final de `ref_02`:
+
+### FIGURA REF-01 — Flujo del pipeline con shapes
+
+Diagrama de flujo vertical con dos columnas que convergen, mostrando los shapes en cada paso.
+
+**Columna izquierda — Texto:**
+```
+"a dog playing"  (str)
+       ↓
+processor(text=...).to(device)
+       ↓
+model.get_text_features(**inputs)
+       ↓   shape: (N, 512)
+F.normalize(..., p=2, dim=-1)
+       ↓   shape: (N, 512)  ← normalizado
+```
+
+**Columna derecha — Imagen:**
+```
+PIL Image
+       ↓
+processor(images=...).to(device)
+       ↓
+model.get_image_features(**inputs)
+       ↓   shape: (N, 512)
+F.normalize(..., p=2, dim=-1)
+       ↓   shape: (N, 512)  ← normalizado
+```
+
+**Las dos columnas convergen:**
+```
+query (1, 512) @ corpus.T (512, N)
+       ↓
+scores  (N,)
+       ↓
+torch.topk(scores, k)
+       ↓
+índices top-k  (k,)
+```
+
+**Especificaciones de la figura:**
+- Fondo blanco, PNG, 1200×900 px mínimo
+- Fuente monospace para el código, sans-serif para las etiquetas de shape
+- Shapes resaltados en gris medio `#666666` y en negrita
+- Flechas negras verticales entre pasos
+- La zona de convergencia marcada con una llave `{` o líneas que se unen
+- Estilo: diagrama técnico limpio, sin color excepto para distinguir las dos columnas (opcional: columna texto en gris claro, columna imagen en gris un poco más oscuro)
