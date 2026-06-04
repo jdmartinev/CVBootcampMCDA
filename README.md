@@ -14,25 +14,7 @@ Esto es lo que hacen sistemas reales como Google Lens, Pinterest Visual Search o
 
 ## Flujo del workshop
 
-```
-[Charlas introductorias]
-    ↓
-Presentación 1 — ¿Qué es visión por computador y por qué importa hoy?
-    ↓
-Presentación 2 — CLIP: arquitectura, aprendizaje contrastivo, espacio compartido
-    ↓
-Presentación 3 — Búsqueda semántica: embeddings, similitud coseno, retrieval
-    ↓
-[Workshop práctico — 3 notebooks en orden]
-    ↓
-01_clip_baseline.ipynb     → construir las funciones base
-    ↓
-02_image_retrieval.ipynb   → construir el motor de búsqueda
-    ↓
-03_competition_submission.ipynb  → competición en HuggingFace
-    ↓
-[Presentaciones de equipos y discusión]
-```
+![Schedule](figs/schedule.png)
 
 ---
 
