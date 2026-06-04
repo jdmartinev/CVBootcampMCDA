@@ -1,0 +1,27 @@
+# Slides — presentaciones privadas
+slides/semantic-search/*
+
+# Instructor only
+instructor/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Env
+.env
+.venv/
+env/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
