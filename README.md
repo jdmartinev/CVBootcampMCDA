@@ -116,6 +116,8 @@ Tiempos estimados de ejecución:
 
 Al terminar el notebook 03, cada equipo entrega su resultado a través del formulario compartido por el instructor al inicio de la sesión.
 
+[Formulario](https://forms.cloud.microsoft/r/NB5m7PP5ZH)
+
 **Qué entregar en el formulario:**
 - Nombre del equipo
 - El archivo `submission.csv` generado por `generate_submission`
