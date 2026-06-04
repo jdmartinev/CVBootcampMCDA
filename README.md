@@ -114,9 +114,9 @@ Tiempos estimados de ejecución:
 ---
 ## Competición
 
-Al terminar el notebook 03, cada equipo entrega su resultado a través del formulario compartido por el instructor al inicio de la sesión.
+Al terminar el notebook 03, cada equipo entrega su resultado a través del formulario.
 
-[Formulario](https://forms.cloud.microsoft/r/NB5m7PP5ZH)
+[Formulario de entrega](https://forms.cloud.microsoft/r/NB5m7PP5ZH)
 
 **Qué entregar en el formulario:**
 - Nombre del equipo
