@@ -42,9 +42,7 @@ Al terminar este notebook, correr la **celda de test integral** al final que ver
 
 Las cuatro funciones del notebook 01 se copian en la celda de setup. El notebook escala el pipeline y añade la capacidad de buscar con una imagen como query.
 
-<!-- FIGURA NB-3: Pipeline de indexación y búsqueda -->
-<!-- Descripción en figuras_notebooks.md → FIGURA NB-3 -->
-![Pipeline de indexación y búsqueda](../assets/nb02_pipeline.png)
+![Pipeline de indexación y búsqueda](figs/NB2.png)
 
 | TODO | Función | Qué implementar |
 |------|---------|----------------|
