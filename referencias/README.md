@@ -27,7 +27,9 @@ Hojas de referencia rápida para consultar **mientras trabajas en los TODOs**. N
 
 ---
 
-## `ref_01_pytorch_hf_models.md` — Modelos de HuggingFace con PyTorch
+## `ref_01_pytorch_hf_models` — Modelos de HuggingFace con PyTorch
+
+!(reref_01_pytorch_hf_models.ipynb)[ref_01_pytorch_hf_models.ipynb]
 
 Cubre el ciclo completo de uso de un modelo preentrenado: carga, configuración para inferencia, procesamiento de inputs y extracción de embeddings. Incluye la tabla de errores más comunes y sus soluciones.
 
