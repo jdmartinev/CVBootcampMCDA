@@ -8,6 +8,7 @@ Este directorio contiene los tres notebooks del workshop, diseñados para comple
 
 ```
 ![NB1](figs/NB1.png)
+![Schedule](figs/schedule.png)
 ```
 
 ---
