@@ -89,8 +89,8 @@ Los equipos con el mismo método pero distinto query obtendrán resultados disti
 
 Dos hojas de referencia rápida disponibles en el repositorio para consultar mientras se trabaja en los TODOs:
 
-- `ref_01_pytorch_hf_models.md` — cómo usar modelos de HuggingFace: `from_pretrained`, `eval()`, `no_grad()`, mover tensores al device, extraer features
-- `ref_02_tensor_operations.md` — operaciones de tensor necesarias: shapes, producto matricial, normalización L2, `topk`, `argsort`, `cat`, fusión lineal
+- `ref_01_pytorch_hf_models.ipynb` — cómo usar modelos de HuggingFace: `from_pretrained`, `eval()`, `no_grad()`, mover tensores al device, extraer features
+- `ref_02_tensor_operations.ipynb` — operaciones de tensor necesarias: shapes, producto matricial, normalización L2, `topk`, `argsort`, `cat`, fusión lineal
 
 ---
 
