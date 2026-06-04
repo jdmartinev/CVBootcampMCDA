@@ -68,6 +68,8 @@ Las cuatro funciones del notebook 01 se copian en la celda de setup. El notebook
 
 ## 03 — Competition Submission
 
+[03_competition_submission](03_competition_submission.ipynb)
+
 **Objetivo:** diseñar un sistema de búsqueda híbrida y competir en el leaderboard de HuggingFace.
 
 Corpus de **2000 imágenes**. Se dan tres imágenes de referencia fijas — un partido de fútbol, un ciclista BMX y gente bailando en un club nocturno. Para cada una, el estudiante debe inventar un query de texto descriptivo y construir un sistema que combine esa señal de texto con la señal visual de la imagen de referencia.
