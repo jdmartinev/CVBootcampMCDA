@@ -50,9 +50,7 @@ Las cuatro funciones del notebook 01 se copian en la celda de setup. El notebook
 | 6 | `search_by_text` | Pipeline completo: texto → embedding → scores → top-k índices y scores |
 | 7 | `search_by_image` | Pipeline imagen → embedding → scores → top-k, con soporte para excluir la imagen query del resultado |
 
-<!-- FIGURA NB-4: Simetría del pipeline texto vs imagen -->
-<!-- Descripción en figuras_notebooks.md → FIGURA NB-4 -->
-![Mismo pipeline, dos modalidades](../assets/nb02_symmetry.png)
+![Mismo pipeline, dos modalidades](figs/NB2_2.png)
 
 **Visualizaciones incluidas:**
 - Histograma de similitudes: pares correctos vs pares aleatorios — evidencia de que el espacio compartido funciona
