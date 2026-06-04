@@ -112,15 +112,20 @@ Tiempos estimados de ejecución:
 - Notebook 03: ~10 min total (~5 min de indexación de 2000 imágenes + reto)
 
 ---
-
 ## Competición
 
-La competición está en HuggingFace Competitions. El link se comparte al inicio del workshop.
+Al terminar el notebook 03, cada equipo entrega su resultado a través del formulario compartido por el instructor al inicio de la sesión.
 
-- Límite: **3 submissions por día**
-- Métrica: **Overlap@10** promedio sobre las 3 imágenes de referencia
-- El notebook 03 incluye una función `evaluate_local` para medir el score localmente antes de subir
-- El CSV de submission incluye el `query_text` usado — esto permite comparar estrategias en la discusión final
+**Qué entregar en el formulario:**
+- Nombre del equipo
+- El archivo `submission.csv` generado por `generate_submission`
+- Los queries de texto usados para cada imagen de referencia (`ref_0`, `ref_1`, `ref_2`)
+- El valor de `alpha` utilizado
+- Una descripción breve de la estrategia (qué probaron, qué funcionó)
+
+**Los resultados se anuncian al final de la sesión**, después de evaluar todos los submissions contra la ground truth. Esto permite que la discusión final incluya una comparación real entre equipos — qué queries funcionaron mejor, qué estrategias de fusión dieron mayor Overlap@10.
+
+**Métrica:** Overlap@10 promedio sobre las 3 imágenes de referencia.
 
 **Puntos de referencia esperados** para `clip-vit-base-patch32` con 2000 imágenes:
 
