@@ -88,7 +88,7 @@ $$\text{score} = \frac{1}{3} \sum_{i=1}^{3} \frac{|\text{top-10}_{\text{tuyo}}(i
 
 <!-- FIGURA NB-6: La métrica Overlap@10 -->
 <!-- Descripción en figuras_notebooks.md → FIGURA NB-6 -->
-![Métrica Overlap@10](../assets/nb03_overlap_metric.png)
+![Métrica Overlap@10](figs/NB3_2.png)
 
 Los top-10 del estudiante se comparan contra los top-10 que recuperaría un oracle que conoce los captions reales de Flickr30k. Equipos con el mismo método pero distinto query obtendrán resultados distintos — eso es lo que genera variación en el leaderboard.
 
