@@ -37,13 +37,15 @@ Cubre el ciclo completo de uso de un modelo preentrenado: carga, configuración 
 
 ---
 
-## `ref_02_tensor_operations.md` — Operaciones con tensores
+## `ref_02_tensor_operations` — Operaciones con tensores
+
+[ref_02_tensor_operations.ipynb](ref_02_tensor_operations.ipynb)
 
 Cubre las operaciones de tensor que aparecen en los TODOs: shapes, multiplicación matricial, normalización L2, topk, argsort, indexación y concatenación. Incluye el flujo completo del pipeline con los shapes en cada paso.
 
 <!-- FIGURA REF-01: Flujo del pipeline con shapes -->
 <!-- Ver descripción abajo -->
-![Flujo del pipeline con shapes](../assets/ref_pipeline_shapes.png)
+![Flujo del pipeline con shapes](figs/pipeline.png)
 
 **Relevante para:** TODO 3, TODO 4, TODO 5, TODO 6, TODO 7, TODO A, TODO B, TODO C.
 
