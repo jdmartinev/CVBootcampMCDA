@@ -7,11 +7,7 @@ Este directorio contiene los tres notebooks del workshop, diseñados para comple
 ## Orden de ejecución
 
 ```
-01_clip_baseline.ipynb
-        ↓
-02_image_retrieval.ipynb
-        ↓
-03_competition_submission.ipynb
+![NB1](figs/NB1.png)
 ```
 
 ---
