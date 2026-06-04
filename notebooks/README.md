@@ -38,6 +38,8 @@ Al terminar este notebook, correr la **celda de test integral** al final que ver
 
 ## 02 — Image Retrieval
 
+[02_image_retrieval](02_image_retrieval.ipynb)
+
 **Objetivo:** construir el motor de búsqueda completo sobre un corpus de **800 imágenes**.
 
 Las cuatro funciones del notebook 01 se copian en la celda de setup. El notebook escala el pipeline y añade la capacidad de buscar con una imagen como query.
