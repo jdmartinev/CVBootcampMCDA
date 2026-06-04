@@ -4,6 +4,10 @@ Este directorio contiene los tres notebooks del workshop, diseñados para comple
 
 ---
 
+![Flujo de los notebooks](figs/steps.png)
+
+---
+
 ## Orden de ejecución
 
 ```
@@ -22,12 +26,20 @@ Este directorio contiene los tres notebooks del workshop, diseñados para comple
 
 Se trabaja con un subset de **50 imágenes** de Flickr30k para explorar los conceptos sin tiempos de espera. El foco es entender qué ocurre matemáticamente: cómo un texto y una imagen llegan a ser vectores comparables en el mismo espacio.
 
+<!-- FIGURA NB-1: El espacio compartido de CLIP -->
+<!-- Descripción en figuras_notebooks.md → FIGURA NB-1 -->
+![Espacio compartido CLIP](../assets/nb01_shared_space.png)
+
 | TODO | Función | Qué implementar |
 |------|---------|----------------|
 | 1 | `get_text_embeddings` | Tokenizar textos con `CLIPProcessor` y extraer embeddings normalizados L2 con `model.get_text_features` |
 | 2 | `get_image_embeddings` | Preprocesar imágenes PIL y extraer embeddings normalizados L2 con `model.get_image_features` |
 | 3 | `compute_similarity_matrix` | Calcular la matriz N×N de similitud coseno entre imágenes y textos como producto matricial |
 | 4 | `compute_scores` | Calcular el vector de scores (N,) de un único query contra todo el corpus |
+
+<!-- FIGURA NB-2: La matriz de similitud -->
+<!-- Descripción en figuras_notebooks.md → FIGURA NB-2 -->
+![Matriz de similitud](../assets/nb01_similarity_matrix.png)
 
 **Visualizaciones incluidas:**
 - Matriz de similitud 15×15 como heatmap — la diagonal más brillante confirma que CLIP alinea los pares correctos
@@ -44,11 +56,19 @@ Al terminar este notebook, correr la **celda de test integral** al final que ver
 
 Las cuatro funciones del notebook 01 se copian en la celda de setup. El notebook escala el pipeline y añade la capacidad de buscar con una imagen como query.
 
+<!-- FIGURA NB-3: Pipeline de indexación y búsqueda -->
+<!-- Descripción en figuras_notebooks.md → FIGURA NB-3 -->
+![Pipeline de indexación y búsqueda](../assets/nb02_pipeline.png)
+
 | TODO | Función | Qué implementar |
 |------|---------|----------------|
 | 5 | `build_image_index` | Procesar el corpus en batches de 32 y concatenar los embeddings en una matriz `(800, 512)` |
 | 6 | `search_by_text` | Pipeline completo: texto → embedding → scores → top-k índices y scores |
 | 7 | `search_by_image` | Pipeline imagen → embedding → scores → top-k, con soporte para excluir la imagen query del resultado |
+
+<!-- FIGURA NB-4: Simetría del pipeline texto vs imagen -->
+<!-- Descripción en figuras_notebooks.md → FIGURA NB-4 -->
+![Mismo pipeline, dos modalidades](../assets/nb02_symmetry.png)
 
 **Visualizaciones incluidas:**
 - Histograma de similitudes: pares correctos vs pares aleatorios — evidencia de que el espacio compartido funciona
@@ -68,6 +88,10 @@ Las cuatro funciones del notebook 01 se copian en la celda de setup. El notebook
 
 Corpus de **2000 imágenes**. Se dan tres imágenes de referencia fijas — un partido de fútbol, un ciclista BMX y gente bailando en un club nocturno. Para cada una, el estudiante debe inventar un query de texto descriptivo y construir un sistema que combine esa señal de texto con la señal visual de la imagen de referencia.
 
+<!-- FIGURA NB-5: Flujo completo del reto -->
+<!-- Descripción en figuras_notebooks.md → FIGURA NB-5 -->
+![Flujo del reto de competición](../assets/nb03_competition_flow.png)
+
 | TODO | Qué implementar |
 |------|----------------|
 | **A** | Definir `my_queries`: un query de texto en inglés para cada imagen de referencia. No se pueden usar captions del dataset. Mínimo 10 caracteres por query. |
@@ -77,6 +101,10 @@ Corpus de **2000 imágenes**. Se dan tres imágenes de referencia fijas — un p
 **Métrica — Overlap@10:**
 
 $$\text{score} = \frac{1}{3} \sum_{i=1}^{3} \frac{|\text{top-10}_{\text{tuyo}}(i) \cap \text{top-10}_{\text{oracle}}(i)|}{10}$$
+
+<!-- FIGURA NB-6: La métrica Overlap@10 -->
+<!-- Descripción en figuras_notebooks.md → FIGURA NB-6 -->
+![Métrica Overlap@10](../assets/nb03_overlap_metric.png)
 
 Los top-10 del estudiante se comparan contra los top-10 que recuperaría un oracle que conoce los captions reales de Flickr30k. Equipos con el mismo método pero distinto query obtendrán resultados distintos — eso es lo que genera variación en el leaderboard.
 
