@@ -116,7 +116,7 @@ Tiempos estimados de ejecución:
 
 Al terminar el notebook 03, cada equipo entrega su resultado a través del formulario.
 
-[Formulario de entrega](https://forms.cloud.microsoft/r/NB5m7PP5ZH)
+[Formulario de entrega](https://forms.gle/qwLLZigmTmdXr4bK9)
 
 **Qué entregar en el formulario:**
 - Nombre del equipo
